@@ -1,6 +1,6 @@
 ## ohos-gmssl-binding
 
-![Platform](https://img.shields.io/badge/platform-arm64/arm/x86_64-blue) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![Platform](https://img.shields.io/badge/platform-arm64/arm/x86__64-blue) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # !Note: current har package can't use directly, application can't find dynamic library and will crash.
 
