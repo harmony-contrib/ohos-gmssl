@@ -1,0 +1,27 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 1d7d12d9..1d21015c 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -579,11 +579,21 @@ set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+ 
+ SET_TARGET_PROPERTIES(gmssl PROPERTIES VERSION 3.1 SOVERSION 3)
+ 
++if(UNIX AND NOT APPLE)
++    set_target_properties(gmssl PROPERTIES
++        LINK_FLAGS "-Wl,-soname,libgmssl.so"
++    )
++endif()
++
+ 
+ install(TARGETS gmssl ARCHIVE DESTINATION lib LIBRARY DESTINATION lib RUNTIME DESTINATION bin)
+ install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/gmssl DESTINATION include)
+ 
+-if(UNIX AND NOT APPLE)
++if(CMAKE_SYSTEM_NAME MATCHES "OHOS")
++  set(OHOS TRUE)
++endif()
++
++if(UNIX AND NOT APPLE AND NOT OHOS)
+ 	message(STATUS "Detected Linux, configuring /etc/ld.so.conf.d/gmssl.conf")
+ 	install(CODE "
+ 		execute_process(COMMAND mkdir -p /etc/ld.so.conf.d)

@@ -1,5 +1,11 @@
 #!/bin/sh
 
+patch_file="${PWD}/patch/gmssl.patch"
+
+pushd "GmSSL"
+git apply "${patch_file}"
+popd
+
 build_architecture() {
     local arch=$1
     local build_shared_libs=$2
@@ -26,3 +32,7 @@ build_architecture "armeabi-v7a" "OFF"
 
 build_architecture "x86_64" "ON"
 build_architecture "x86_64" "OFF"
+
+pushd "GmSSL"
+git apply --reverse "${patch_file}"
+popd

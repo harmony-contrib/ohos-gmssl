@@ -46,8 +46,10 @@ if(GmSSL_FOUND)
     set(GMSSL_LIBRARIES ${GMSSL_SSL_LIBRARY})
     if(NOT TARGET GmSSL)
         add_library(GmSSL UNKNOWN IMPORTED)
-        set_target_properties(GmSSL PROPERTIES INTERFACE_INCLUDE_DIRECTORIES "${GMSSL_INCLUDE_DIRS}" SOVERSION 3.1.2)
-        set_target_properties(GmSSL PROPERTIES IMPORTED_LOCATION "${GMSSL_SSL_LIBRARY}")
+        set_target_properties(GmSSL PROPERTIES 
+            INTERFACE_INCLUDE_DIRECTORIES "${GMSSL_INCLUDE_DIRS}"
+            IMPORTED_LOCATION "${GMSSL_SSL_LIBRARY}"
+        )
     endif()
 else()
     message(FATAL_ERROR "GmSSL not found")
