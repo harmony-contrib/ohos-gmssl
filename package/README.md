@@ -18,5 +18,5 @@ set(CMAKE_MODULE_PATH ${GMSSL_ROOT_PATH})
 
 find_package(GmSSL REQUIRED)
 
-target_link_libraries(entry PRIVATE GmSSL::SSL)
+target_link_libraries(entry PRIVATE GmSSL)
 ```

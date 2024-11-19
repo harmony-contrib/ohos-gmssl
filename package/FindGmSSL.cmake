@@ -12,7 +12,6 @@ file(GLOB_RECURSE GMSSL_HEADER_LIST
     "${GMSSL_SEARCH_PATH}/include/gmssl/*.h"
 )
 
-# collect all GMSSL header files
 if(NOT GMSSL_HEADER_LIST)
     message(FATAL_ERROR "No GmSSL headers found in ${GMSSL_SEARCH_PATH}/include/gmssl/")
 endif()
@@ -42,16 +41,16 @@ find_package_handle_standard_args(GmSSL DEFAULT_MSG
     GMSSL_SSL_LIBRARY 
 )
 
-if(GMSSL_FOUND)
+if(GmSSL_FOUND)
     set(GMSSL_INCLUDE_DIRS ${GMSSL_INCLUDE_DIR})
     set(GMSSL_LIBRARIES ${GMSSL_SSL_LIBRARY})
-    if(NOT TARGET GmSSL::SSL)
-        add_library(GmSSL::SSL UNKNOWN IMPORTED)
-        set_target_properties(GmSSL::SSL PROPERTIES
-            IMPORTED_LOCATION "${GMSSL_SSL_LIBRARY}"
-            INTERFACE_INCLUDE_DIRECTORIES "${GMSSL_INCLUDE_DIRS}"
-        )
+    if(NOT TARGET GmSSL)
+        add_library(GmSSL UNKNOWN IMPORTED)
+        set_target_properties(GmSSL PROPERTIES INTERFACE_INCLUDE_DIRECTORIES "${GMSSL_INCLUDE_DIRS}" SOVERSION 3.1.2)
+        set_target_properties(GmSSL PROPERTIES IMPORTED_LOCATION "${GMSSL_SSL_LIBRARY}")
     endif()
+else()
+    message(FATAL_ERROR "GmSSL not found")
 endif()
 
 mark_as_advanced(GMSSL_INCLUDE_DIR GMSSL_SSL_LIBRARY)
